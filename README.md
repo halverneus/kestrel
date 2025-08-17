@@ -1,4 +1,4 @@
-# Kestrel OS
+![Kestrel OS](resources/images/kestrel-logo-named-100.png)
 
 This repository contains all of the code required to build Kestrel OS, a custom Universal Blue image template based off of Aurora including Nvidia drivers. If you are using Aurora + Nvidia or Bazzite DX (KDE) + Nvidia, you can try out this image with the following command:
 
