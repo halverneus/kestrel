@@ -25,6 +25,16 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build.sh && \
     ostree container commit
 
+COPY resources/images/kestrel-logo-named-100.png /usr/share/pixmaps/fedora_logo_med.png
+COPY resources/images/kestrel-logo-named-100.png /usr/share/pixmaps/fedora-logo.png
+COPY resources/images/kestrel-logo-named.svg /usr/share/pixmaps/fedora-logo.svg
+COPY resources/images/kestrel-logo-named-32.png /usr/share/pixmaps/fedora-logo-small.png
+COPY resources/images/kestrel-logo-128.png /usr/share/pixmaps/fedora-logo-sprite.png
+COPY resources/images/kestrel-logo.svg /usr/share/icons/hicolor/scalable/distributor-logo.svg
+COPY resources/images/kestrel-logo-256.png /usr/share/pixmaps/system-logo.png
+COPY resources/images/kestrel-logo-256.png /usr/share/pixmaps/system-logo-white.png
+
+
 ### LINTING
 ## Verify final image and contents are correct.
 RUN bootc container lint
