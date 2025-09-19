@@ -34,7 +34,7 @@ dnf5 -y config-manager addrepo --from-repofile=https://download.docker.com/linux
 dnf5 -y install container-selinux
 
 # Remove Podman and install Docker
-dnf5 -y remove podman podman-docker buildah skopeo
+dnf5 -y remove podman podman-docker
 dnf5 -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Enable Docker service and socket
