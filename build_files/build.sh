@@ -28,7 +28,7 @@ dnf5 -y config-manager setopt fedora-cisco-openh264.enabled=1
 dnf5 -y install steam gamescope
 
 # Add Docker repository
-dnf5 -y config-manager addrepo https://download.docker.com/linux/fedora/docker-ce.repo
+dnf5 -y config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
 
 # Install SELinux policy for Docker
 dnf5 -y install container-selinux
