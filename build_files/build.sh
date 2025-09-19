@@ -40,6 +40,3 @@ dnf5 -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docke
 # Enable Docker service and socket
 systemctl enable docker.service
 systemctl enable docker.socket
-
-# Pre-create docker group (users will be added at runtime)
-groupadd -f docker
