@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.plasma5support as Plasma5Support
+import org.kde.kirigami as Kirigami
 
 PlasmoidItem {
     id: root
@@ -63,14 +64,19 @@ PlasmoidItem {
         }
     }
 
-    compactRepresentation: Rectangle {
-        color: "#" + currentHexColor
-        border.color: "gray"
-        border.width: 1
+    compactRepresentation: MouseArea {
+        id: compactRoot
 
-        MouseArea {
+        implicitWidth: Kirigami.Units.iconSizes.medium
+        implicitHeight: Kirigami.Units.iconSizes.medium
+
+        onClicked: root.expanded = !root.expanded
+
+        Kirigami.Icon {
             anchors.fill: parent
-            onClicked: root.expanded = !root.expanded
+            source: "input-keyboard"
+            color: "#" + currentHexColor
+            isMask: true
         }
     }
 
