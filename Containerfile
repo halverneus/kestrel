@@ -37,7 +37,7 @@ COPY resources/images/kestrel-logo-256x256.png /usr/share/pixmaps/system-logo-wh
 
 # System76 Keyboard Backlight Support
 COPY resources/system76-keyboard/udev/99-kbd-backlight.rules /usr/lib/udev/rules.d/99-kbd-backlight.rules
-COPY resources/system76-keyboard/cli/set-keyboard-backlight /usr/bin/set-keyboard-backlight
+COPY resources/system76-keyboard/cli/set-keyboard-light /usr/bin/set-keyboard-light
 COPY resources/system76-keyboard/widget/org.kde.kbdbacklight /usr/share/plasma/plasmoids/org.kde.kbdbacklight
 
 
