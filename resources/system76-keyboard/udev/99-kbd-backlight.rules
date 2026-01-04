@@ -1,0 +1,2 @@
+# Allow users in the input group to control keyboard backlight
+SUBSYSTEM=="leds", KERNEL=="system76_acpi::kbd_backlight", RUN+="/bin/chmod 666 /sys/class/leds/system76_acpi::kbd_backlight/brightness /sys/class/leds/system76_acpi::kbd_backlight/color"

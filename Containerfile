@@ -25,6 +25,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build.sh && \
     ostree container commit
 
+# Kestrel Branding
 COPY resources/images/kestrel-logo-named-100.png /usr/share/pixmaps/fedora_logo_med.png
 COPY resources/images/kestrel-logo-named-100.png /usr/share/pixmaps/fedora-logo.png
 COPY resources/images/kestrel-logo-named.svg /usr/share/pixmaps/fedora-logo.svg
@@ -33,6 +34,11 @@ COPY resources/images/kestrel-logo-128x128.png /usr/share/pixmaps/fedora-logo-sp
 COPY resources/images/kestrel-logo.svg /usr/share/icons/hicolor/scalable/distributor-logo.svg
 COPY resources/images/kestrel-logo-256x256.png /usr/share/pixmaps/system-logo.png
 COPY resources/images/kestrel-logo-256x256.png /usr/share/pixmaps/system-logo-white.png
+
+# System76 Keyboard Backlight Support
+COPY resources/system76-keyboard/udev/99-kbd-backlight.rules /usr/lib/udev/rules.d/99-kbd-backlight.rules
+COPY resources/system76-keyboard/cli/set-keyboard-backlight /usr/bin/set-keyboard-backlight
+COPY resources/system76-keyboard/widget/org.kde.kbdbacklight /usr/share/plasma/plasmoids/org.kde.kbdbacklight
 
 
 ### LINTING

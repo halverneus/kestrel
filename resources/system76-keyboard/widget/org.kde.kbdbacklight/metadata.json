@@ -1,0 +1,12 @@
+{
+  "KPlugin": {
+    "Id": "org.kde.kbdbacklight",
+    "Name": "Keyboard Backlight",
+    "Description": "Control System76 keyboard backlight color",
+    "Icon": "preferences-desktop-keyboard",
+    "Authors": [{ "Name": "Jeromy Streets" }],
+    "Category": "System Information",
+    "Version": "1.0.0"
+  },
+  "X-Plasma-API-Minimum-Version": "6.0"
+}
