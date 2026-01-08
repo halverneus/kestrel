@@ -18,6 +18,9 @@ brew "fd"
 # Preferred 'grep' replacement.
 brew "ripgrep"
 
+# GitHub CLI tool.
+brew "gh"
+
 # Tablet mirroring tool (primarily for having a whiteboard for teaching).
 brew "scrcpy"
 
