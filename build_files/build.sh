@@ -9,9 +9,6 @@ set -ouex pipefail
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
-# this installs a package from fedora repos
-# dnf5 install -y tmux
-
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
@@ -19,9 +16,44 @@ set -ouex pipefail
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
-#### Example for enabling a System Unit File
-
-# systemctl enable podman.socket
-dnf5 -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+#### Enable RPM Fusion (free + non-free) and Cisco OpenH264
+dnf5 -y install \
+    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 dnf5 -y config-manager setopt fedora-cisco-openh264.enabled=1
-dnf5 -y install steam gamescope simple-scan python3-pip ibus-devel gobject-introspection-devel python3-devel portaudio-devel python3-virtualenv pkg-config wget vulkan-loader-devel glslang xclip wtype ydotool
+
+#### Games and desktop utilities
+dnf5 -y install steam gamescope simple-scan ydotool
+
+#### Build toolchain
+# clang-devel provides libclang, required by Rust bindgen (e.g. whisper-rs in voice).
+# cmake is required by whisper.cpp (pulled in via whisper-rs).
+dnf5 -y install \
+    gcc gcc-c++ \
+    clang clang-devel \
+    cmake make \
+    pkgconf-pkg-config
+
+#### Development libraries for local Rust builds (reader, voice)
+# shaderc provides glslc, which whisper.cpp's cmake FindVulkan requires.
+# gtk3-devel is needed by rfd (file dialogs) in reader.
+dnf5 -y install \
+    alsa-lib-devel \
+    expat-devel \
+    fontconfig-devel \
+    freetype-devel \
+    gtk3-devel \
+    libX11-devel \
+    libxcb-devel \
+    libxkbcommon-devel \
+    vulkan-loader-devel \
+    shaderc \
+    wayland-devel \
+    wayland-protocols-devel
+
+#### FFmpeg and codecs (RPM Fusion free + non-free, replaces Brew ffmpeg ecosystem)
+dnf5 -y install ffmpeg ffmpeg-devel
+
+#### CLI tools (replacing Brew formulas)
+# wl-clipboard provides wl-copy/wl-paste for Wayland (replaces xclip).
+dnf5 -y install bat fd-find ripgrep gh helix nushell scrcpy wl-clipboard

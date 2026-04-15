@@ -3,27 +3,6 @@
 #    brew bundle
 #
 
-# Preferred terminal emulator.
-brew "nushell"
-
-# Preferred text editor.
-brew "helix"
-
-# Preferred 'cat' replacement.
-brew "bat"
-
-# Preferred 'find' replacement.
-brew "fd"
-
-# Preferred 'grep' replacement.
-brew "ripgrep"
-
-# GitHub CLI tool.
-brew "gh"
-
-# Tablet mirroring tool (primarily for having a whiteboard for teaching).
-brew "scrcpy"
-
 # Analyzer tools for Zed.
 brew "yaml-language-server"
 brew "clang-build-analyzer"
