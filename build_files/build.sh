@@ -48,6 +48,7 @@ dnf5 -y install \
     libxkbcommon-devel \
     vulkan-loader-devel \
     glslang \
+    glslc \
     wayland-devel \
     wayland-protocols-devel
 
