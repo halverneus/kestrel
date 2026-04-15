@@ -35,7 +35,7 @@ dnf5 -y install \
     pkgconf-pkg-config
 
 #### Development libraries for local Rust builds (reader, voice)
-# shaderc provides glslc, which whisper.cpp's cmake FindVulkan requires.
+# glslang provides shader compiler tools required by whisper.cpp's cmake FindVulkan.
 # gtk3-devel is needed by rfd (file dialogs) in reader.
 dnf5 -y install \
     alsa-lib-devel \
@@ -47,7 +47,7 @@ dnf5 -y install \
     libxcb-devel \
     libxkbcommon-devel \
     vulkan-loader-devel \
-    shaderc \
+    glslang \
     wayland-devel \
     wayland-protocols-devel
 
