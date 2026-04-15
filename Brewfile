@@ -3,6 +3,12 @@
 #    brew bundle
 #
 
+# Preferred terminal shell.
+brew "nushell"
+
+# Tablet mirroring tool (primarily for having a whiteboard for teaching).
+brew "scrcpy"
+
 # Analyzer tools for Zed.
 brew "yaml-language-server"
 brew "clang-build-analyzer"

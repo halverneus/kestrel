@@ -56,4 +56,4 @@ dnf5 -y install ffmpeg ffmpeg-devel
 
 #### CLI tools (replacing Brew formulas)
 # wl-clipboard provides wl-copy/wl-paste for Wayland (replaces xclip).
-dnf5 -y install bat fd-find ripgrep gh helix nushell scrcpy wl-clipboard
+dnf5 -y install bat fd-find ripgrep gh helix wl-clipboard
