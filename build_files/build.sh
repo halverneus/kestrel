@@ -23,7 +23,7 @@ dnf5 -y install \
 dnf5 -y config-manager setopt fedora-cisco-openh264.enabled=1
 
 #### Games and desktop utilities
-dnf5 -y install steam gamescope simple-scan ydotool
+dnf5 -y install steam gamescope antimicrox simple-scan ydotool
 
 #### Build toolchain
 # clang-devel provides libclang, required by Rust bindgen (e.g. whisper-rs in voice).
