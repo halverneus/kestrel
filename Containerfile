@@ -35,6 +35,12 @@ COPY resources/images/kestrel-logo.svg /usr/share/icons/hicolor/scalable/distrib
 COPY resources/images/kestrel-logo-256x256.png /usr/share/pixmaps/system-logo.png
 COPY resources/images/kestrel-logo-256x256.png /usr/share/pixmaps/system-logo-white.png
 
+# YARG Bluetooth Device Fix
+COPY resources/yarg/udev/69-hid.rules /usr/lib/udev/rules.d/69-hid.rules
+
+# Voice Dictation udev Fix
+COPY resources/voice/udev/80-dotool.rules /usr/lib/udev/rules.d/80-dotool.rules
+
 # System76 Keyboard Backlight Support
 COPY resources/system76-keyboard/udev/99-kbd-backlight.rules /usr/lib/udev/rules.d/99-kbd-backlight.rules
 COPY resources/system76-keyboard/cli/set-keyboard-light /usr/bin/set-keyboard-light
