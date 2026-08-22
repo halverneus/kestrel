@@ -22,8 +22,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build.sh && \
-    ostree container commit
+    /ctx/build.sh
 
 # Kestrel Branding
 COPY resources/images/kestrel-logo-named-100.png /usr/share/pixmaps/fedora_logo_med.png
