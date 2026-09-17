@@ -2,28 +2,27 @@
 
 set -ouex pipefail
 
-### Install packages
+### Package repositories
 
-# Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
-
-# Use a COPR Example:
+# The Aurora base image builds its multimedia stack (ffmpeg, libfdk-aac, openh264) from
+# negativo17's "fedora-multimedia" repo, which the base image ships *disabled*. negativo17 and
+# RPM Fusion are not co-installable: the base image's libfdk-aac (epoch 1) obsoletes both
+# fdk-aac and fdk-aac-free, so pulling steam's 32-bit chain out of RPM Fusion leaves
+# pipewire-libs.i686 with no provider for libfdk-aac.so.2 and the transaction fails to resolve.
+# So: enable negativo17 for the installs that need it, and never add RPM Fusion.
 #
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+# skip_if_unavailable=0 turns an unreachable negativo17 mirror into a loud build failure instead
+# of a silent fallback that resolves against the wrong repos.
+MULTIMEDIA=(
+    --enablerepo=fedora-multimedia
+    --setopt=fedora-multimedia.skip_if_unavailable=0
+)
 
-#### Enable RPM Fusion (free + non-free) and Cisco OpenH264
-dnf5 -y install \
-    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 dnf5 -y config-manager setopt fedora-cisco-openh264.enabled=1
 
 #### Games and desktop utilities
-dnf5 -y install steam gamescope antimicrox simple-scan ydotool
+# steam comes from negativo17; the rest are stock Fedora.
+dnf5 -y "${MULTIMEDIA[@]}" install steam gamescope antimicrox simple-scan ydotool
 
 #### Build toolchain
 # clang-devel provides libclang, required by Rust bindgen (e.g. whisper-rs in voice).
@@ -52,8 +51,8 @@ dnf5 -y install \
     wayland-devel \
     wayland-protocols-devel
 
-#### FFmpeg and codecs (RPM Fusion free + non-free, replaces Brew ffmpeg ecosystem)
-dnf5 -y install ffmpeg ffmpeg-devel
+#### FFmpeg and codecs (negativo17, matching the ffmpeg already in the base image)
+dnf5 -y "${MULTIMEDIA[@]}" install ffmpeg ffmpeg-devel
 
 #### CLI tools (replacing Brew formulas)
 # wl-clipboard provides wl-copy/wl-paste for Wayland (replaces xclip).
