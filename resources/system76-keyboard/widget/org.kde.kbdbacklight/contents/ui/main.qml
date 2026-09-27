@@ -74,7 +74,10 @@ PlasmoidItem {
 
         Kirigami.Icon {
             anchors.fill: parent
-            source: "input-keyboard"
+            // Must be the symbolic variant: isMask tints every opaque pixel,
+            // and at this size Breeze falls back to the full-colour 64px icon,
+            // whose solid body masks into a plain rectangle.
+            source: "input-keyboard-symbolic"
             color: "#" + currentHexColor
             isMask: true
         }
