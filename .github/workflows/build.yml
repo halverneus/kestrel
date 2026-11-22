@@ -185,3 +185,18 @@ jobs:
           DIGEST: ${{ steps.push.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
+
+  # GitHub disables scheduled workflows after 60 days without repository
+  # activity. Re-enabling an already-enabled workflow through the API resets
+  # that timer, so scheduled builds keep running even when nothing is committed.
+  keepalive:
+    name: Keep scheduled workflow enabled
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: write
+    steps:
+      - name: Re-enable workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/build.yml/enable"
